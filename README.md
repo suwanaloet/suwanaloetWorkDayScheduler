@@ -1,10 +1,9 @@
 <<<<<<< HEAD
-# Work Day Scheduler Starter Code
-=======
+
 # suwanaloetWorkDayScheduler
 * momentjs dynamic date setting
 * hour/textbox/button generation 
 * text saving and coloring
-* Github: 
-* Github Deploy:
-* ![Project Screenshot](./screenshot.png)
+* Github: https://github.com/suwanaloet/suwanaloetWorkDayScheduler
+* Github Deploy: https://suwanaloet.github.io/suwanaloetWorkDayScheduler/Develop/index.html
+* ![Project Screenshot](./Develop/screenshot.png)
