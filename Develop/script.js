@@ -1,4 +1,5 @@
 //Current day displayed at top of calendar
+var storedTasks = {};
 
 var present = moment().format('MMMM Do YYYY');
 $("#currentDay").text(present);
@@ -62,13 +63,12 @@ var times = [
     }
 ]
 
-//local storage compatibility (for refresh/persistence)
-
-var storedTasks = JSON.parse(localStorage.getItem("storedTasks"));
+//local storage compatibility (for refresh/persistenc
 
 
 //create time columns on startup
 times.forEach(function (tasks) {
+    var storedTasks = $("textarea").val();
     var taskRow = $("<form class=row>")
     $("#taskrows").append(taskRow);
 
@@ -77,7 +77,7 @@ times.forEach(function (tasks) {
 
 
     var taskColumn = $("<form class= col-8 description>")
-    var taskData = $("<textarea >")
+    var taskData = $("<textarea>")
 
     taskColumn.append(taskData);
 
@@ -92,20 +92,42 @@ times.forEach(function (tasks) {
     //time block interaction
     //color code blocks based on before 'preset' or after 
     //red= time past, yellow= present, green=future
-    if (hourColumn.absoluteTime < moment().format("kk")) {
+    if (JSON.stringify(times.absoluteTime) < moment().format("kk")) {
         taskData.addClass("past")
-    } else if (hourColumn.absoluteTime === moment().format("kk")) {
+    } else if (JSON.stringify(times.absoluteTime) === moment().format("kk")) {
         taskData.addClass("present")
     } else {
         taskData.addClass("future")
     }
+
+    var loadTasks = function () {
+        tasks = JSON.parse(localStorage.getItem("storedTasks"))
+        if (!storedTasks) {
+            storedTasks = {
+                text: [],
+            };
+        }
+        $.each(storedTasks, function (list, arr) {
+            arr.forEach(function (storedTasks) {
+                createTask(task.text, list);
+            });
+        });
+    };
+    var saveTasks = function () {
+
+        var storedTasks = $("textarea").val();
+        localStorage.setItem("storedTasks", JSON.stringify(storedTasks));
+    };
+    $(".saveBtn").on("click", function () {
+        preventDefault();
+        saveTasks();
+    })
+
+    loadTasks();
+
+
 });
 
-
-$(".saveBtn").on("click", function () {
-    var taskData =
-        saveData();
-})
 
 
 
